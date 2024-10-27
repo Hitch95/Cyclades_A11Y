@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+# Cyclades A11Y
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The goal of this project is to enhance the design and accessibility features of the [Cyclades](https://candidat.examens-concours.gouv.fr/cyccandidat/portal/accueil?codeER=&domaine=) website.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is divided into two main components: the frontend and the backend.
 
-## Expanding the ESLint configuration
+### Frontend
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The frontend is built using the following technologies:
 
-- Configure the top-level `parserOptions` property like this:
+- [Vite](https://vite.dev/): A next-generation frontend tooling that provides a faster and leaner development experience.
+- [TypeScript](https://www.typescriptlang.org/): A statically typed superset of JavaScript that adds optional types.
+- [React](https://react.dev/): A JavaScript library for building user interfaces.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+The frontend is currently deployed on [Vercel](https://vercel.com/).
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Backend
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+The backend is built using the following technologies:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- [Deno](https://deno.com/): A modern runtime for JavaScript and TypeScript that is secure by default.
+- [TypeScript](https://www.typescriptlang.org/): A statically typed superset of JavaScript that adds optional types.
+- [SQLite](https://www.sqlite.org/): A lightweight, disk-based database that doesn't require a separate server process.
+
+## Design
+
+The design for this project is created using [Figma](https://www.figma.com/design/tITLtWt8fb8qXBo5D3ykFn/Cyclades?node-id=1-2&t=MXg00dPxTn1BiBww-1).
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm (for frontend development)
+- Deno (for backend development)
+
+### Installation
+
+#### Frontend
+
+1. Clone the [repository](https://github.com/Hitch95/Cyclades_A11Y.git).
+2. Navigate to the cyclades directory.
+3. Run `npm install` to install dependencies.
+4. Run `npm run dev` to start the development server.
+
+#### Backend
+
+1. Clone the [repository](https://github.com/Hitch95/Cyclades_A11Y.git).
+2. Navigate to the cyclades-server directory.
+3. Run `deno task start` to start the backend server.
+
+## Contact
+
+For any questions or feedback, you can contact me in my [LinkedIn](www.linkedin.com/in/bahloul-moufidi).

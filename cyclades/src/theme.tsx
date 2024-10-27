@@ -1,4 +1,12 @@
+import '@mui/material/styles';
 import { createTheme } from '@mui/material/styles';
+
+declare module '@mui/material/styles' {
+  interface TypeBackground {
+    navbar: string;
+    footer: string;
+  }
+}
 
 const theme = createTheme({
   palette: {
