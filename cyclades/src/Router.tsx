@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/NotFound';
+import HandleSubscription from './pages/HandleSubscription';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignUp />,
+  },
+  {
+    path: '/handleSubscription',
+    element: <HandleSubscription />,
   },
   {
     path: '/protected',

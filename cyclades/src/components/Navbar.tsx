@@ -1,12 +1,23 @@
+import { useState } from 'react';
 import { Button, Link, ListItemText, Stack, Typography } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import MarianneLogo from '/marianne.webp';
 import CycladesLogo from '/logo-cyclades.webp';
+import MenuPopup from './MenuPopup';
 
 const Navbar = () => {
   const isAuthenticated = false;
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const handleOpenMenu = () => {
+    setOpenMenu(true);
+  };
+
+  const handleCloseMenu = () => {
+    setOpenMenu(false);
+  };
 
   return (
     <Stack
@@ -18,7 +29,6 @@ const Navbar = () => {
       <Stack
         direction="row"
         sx={{
-          width: '100%',
           backgroundColor: '#FAF7F4',
           alignItems: 'center',
         }}
@@ -63,7 +73,6 @@ const Navbar = () => {
           backgroundColor: (theme) => theme.palette.background.navbar,
           justifyContent: 'space-between',
           height: '60px',
-          paddingLeft: '60px',
         }}
       >
         {/* Left group */}
@@ -72,24 +81,21 @@ const Navbar = () => {
           sx={{
             alignItems: 'center',
             gap: 2,
+            paddingLeft: '60px',
           }}
         >
           <ListItemText>
-            <Link
-              href="/"
-              color="inherit"
-              sx={{
-                height: '24px',
-              }}
-            >
+            <Link href="/" color="inherit">
               <HomeIcon />
             </Link>
           </ListItemText>
           <Button
             color="inherit"
+            onClick={handleOpenMenu}
             sx={{
-              minHeight: '100%',
+              height: '100%',
               borderRadius: '0px',
+              fontSize: '20px',
               '&:hover': {
                 color: '#9C2D41',
                 backgroundColor: '#FAF7F4',
@@ -99,25 +105,65 @@ const Navbar = () => {
             Menu
             <ExpandMoreIcon />
           </Button>
+          <MenuPopup open={openMenu} handleClose={handleCloseMenu} />
         </Stack>
 
         {/* Right group */}
         {!isAuthenticated ? (
           <Stack
             direction="row"
-            spacing={2}
-            sx={{ alignItems: 'center', marginRight: '60px' }}
+            sx={{ alignItems: 'center', paddingRight: '60px' }}
           >
-            <ListItemText>
-              <Link href="/signup" color="inherit">
+            <Button
+              color="inherit"
+              sx={{
+                height: '100%',
+                borderRadius: '0px',
+                borderRight: '1px solid #9C2D41',
+                fontSize: '20px',
+                textTransform: 'capitalize',
+                backgroundColor: '#FAF7F4',
+                color: '#9C2D41',
+              }}
+            >
+              <Link
+                href="/signup"
+                color="inherit"
+                sx={{
+                  textDecoration: 'none',
+                  '&:hover': {
+                    textDecoration: 'underline',
+                  },
+                }}
+              >
                 Sign Up
               </Link>
-            </ListItemText>
-            <ListItemText>
-              <Link href="/login" color="inherit">
+            </Button>
+            <Button
+              color="inherit"
+              sx={{
+                height: '100%',
+                borderRadius: '0px',
+                borderLeft: '1px solid #9C2D41',
+                fontSize: '20px',
+                textTransform: 'capitalize',
+                backgroundColor: '#FAF7F4',
+                color: '#9C2D41',
+              }}
+            >
+              <Link
+                href="/login"
+                color="inherit"
+                sx={{
+                  textDecoration: 'none',
+                  '&:hover': {
+                    textDecoration: 'underline',
+                  },
+                }}
+              >
                 Login
               </Link>
-            </ListItemText>
+            </Button>
           </Stack>
         ) : (
           <ListItemText sx={{ marginRight: '60px' }}>
