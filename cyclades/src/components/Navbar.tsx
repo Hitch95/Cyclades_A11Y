@@ -6,6 +6,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MarianneLogo from '/marianne.webp';
 import CycladesLogo from '/logo-cyclades.webp';
 import MenuPopup from './MenuPopup';
+import theme from '../theme';
 
 const Navbar = () => {
   const isAuthenticated = false;
@@ -85,7 +86,7 @@ const Navbar = () => {
           }}
         >
           <ListItemText>
-            <Link href="/" color="inherit">
+            <Link href="/" color="inherit" aria-label="Accueil">
               <HomeIcon />
             </Link>
           </ListItemText>
@@ -98,7 +99,7 @@ const Navbar = () => {
               fontSize: '20px',
               '&:hover': {
                 color: '#9C2D41',
-                backgroundColor: '#FAF7F4',
+                backgroundColor: theme.palette.background.cream,
               },
             }}
           >
@@ -112,18 +113,24 @@ const Navbar = () => {
         {!isAuthenticated ? (
           <Stack
             direction="row"
-            sx={{ alignItems: 'center', paddingRight: '60px' }}
+            sx={{ alignItems: 'center', paddingRight: '60px', gap: 4 }}
           >
             <Button
-              color="inherit"
               sx={{
                 height: '100%',
                 borderRadius: '0px',
-                borderRight: '1px solid #9C2D41',
                 fontSize: '20px',
                 textTransform: 'capitalize',
-                backgroundColor: '#FAF7F4',
-                color: '#9C2D41',
+                color: '#FAF7F4',
+                background:
+                  'linear-gradient(to right, #FAF7F4 50%, #9C2D41 50%)',
+                backgroundSize: '200% 100%',
+                backgroundPosition: '100% 0%',
+                transition: 'background-position 0.5s ease-in-out',
+                '&:hover': {
+                  color: 'black',
+                  backgroundPosition: '0% 0%',
+                },
               }}
             >
               <Link
@@ -140,15 +147,21 @@ const Navbar = () => {
               </Link>
             </Button>
             <Button
-              color="inherit"
               sx={{
                 height: '100%',
                 borderRadius: '0px',
-                borderLeft: '1px solid #9C2D41',
                 fontSize: '20px',
                 textTransform: 'capitalize',
-                backgroundColor: '#FAF7F4',
-                color: '#9C2D41',
+                color: '#FAF7F4',
+                background:
+                  'linear-gradient(to right, #FAF7F4 50%, #9C2D41 50%)',
+                backgroundSize: '200% 100%',
+                backgroundPosition: '100% 0%',
+                transition: 'background-position 0.5s ease-in-out',
+                '&:hover': {
+                  color: 'black',
+                  backgroundPosition: '0% 0%',
+                },
               }}
             >
               <Link

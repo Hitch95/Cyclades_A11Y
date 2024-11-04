@@ -58,6 +58,7 @@ const MenuPopup: FC<MenuPopupProps> = ({ open, handleClose }) => {
               sx={{
                 backgroundColor: '#9C2D41',
                 color: 'white',
+                padding: '0',
               }}
             >
               {menuItems.map((item, index) => (
