@@ -2,11 +2,11 @@ import { Link, ListItemText, Stack, Typography } from '@mui/material';
 
 const Footer = () => {
   const footerPages = [
-    { label: 'Plan du site', href: '/' },
-    { label: 'Mentions légales', href: '/' },
-    { label: 'Gestion des cookies', href: '/' },
-    { label: 'Un problème ?', href: '/' },
-    { label: 'Accessibilité conforme', href: '/' },
+    { id: 1, label: 'Plan du site', href: '/' },
+    { id: 2, label: 'Mentions légales', href: '/' },
+    { id: 3, label: 'Gestion des cookies', href: '/' },
+    { id: 4, label: 'Un problème ?', href: '/' },
+    { id: 5, label: 'Accessibilité conforme', href: '/' },
   ];
 
   return (
@@ -27,11 +27,10 @@ const Footer = () => {
         backgroundColor: (theme) => theme.palette.background.footer,
       }}
     >
-      {footerPages.map((item, index) => (
-        <ListItemText>
+      {footerPages.map((item) => (
+        <ListItemText key={item.id}>
           <Link
             href={item.href}
-            key={index}
             aria-label="Plan du site"
             color="inherit"
             sx={{
@@ -45,7 +44,7 @@ const Footer = () => {
         </ListItemText>
       ))}
       <ListItemText>
-        <Typography>
+        <Typography sx={{}}>
           © Ministère de l'éducation nationale, Cyclades - Tous droits réservés
         </Typography>
       </ListItemText>

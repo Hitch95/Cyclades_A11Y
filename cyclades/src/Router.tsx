@@ -24,6 +24,9 @@ const router = createBrowserRouter([
     element: <HandleSubscription />,
   },
   {
+    path: '/search',
+  },
+  {
     path: '/protected',
     element: <ProtectedRoute></ProtectedRoute>,
   },
