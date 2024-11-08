@@ -1,9 +1,12 @@
 {
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "deno run --allow-net --allow-read --allow-write --watch server.ts",
+    "start": "deno run --allow-net --allow-read --allow-write server.ts"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "oak": "https://deno.land/x/oak/mod.ts",
+    "cors": "https://deno.land/x/cors/mod.ts",
+    "sqlite": "https://deno.land/x/sqlite@v3.9.1/mod.ts"
   },
   "compileOptions": {
     "strict": "true"
