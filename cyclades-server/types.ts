@@ -19,4 +19,23 @@ export interface Candidate {
   state: string;
   qualification: string;
   created: string;
+  position_id: number;
+  artistic_teaching_id: number | null;
+}
+
+export interface Position {
+  id: number;
+  name: 'Inscrit' | 'Non inscrit';
+}
+
+export interface ArtisticTeaching {
+  id: number;
+  name:
+    | 'Art - Cinéma audiovisuel'
+    | 'Art - Histoire des arts'
+    | 'Art - Théâtre'
+    | 'Art - Arts du cirque'
+    | 'Art - Musique'
+    | 'Art - Danse'
+    | 'Art - Arts plastiques';
 }

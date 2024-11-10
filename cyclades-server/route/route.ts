@@ -4,6 +4,8 @@ import {
   getAllCandidates,
   getCandidateById,
   addOneCandidate,
+  getAllPositions,
+  getAllArtisticTeachings,
 } from '../repositories/candidatesRepository.ts';
 import { Candidate } from '../types.ts';
 
@@ -51,6 +53,18 @@ const candidatesRoute = (router: Router) => {
         error: (error as Error).message,
       };
     }
+  });
+
+  // Get all positions
+  router.get(basePath + '/positions', (ctx) => {
+    const positions = getAllPositions();
+    ctx.response.body = positions;
+  });
+
+  // Get all artistic teachings
+  router.get(basePath + '/artistic-teachings', (ctx) => {
+    const artisticTeachings = getAllArtisticTeachings();
+    ctx.response.body = artisticTeachings;
   });
 };
 
