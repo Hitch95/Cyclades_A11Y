@@ -1,11 +1,10 @@
-import { DB } from 'https://deno.land/x/sqlite@v3.9.1/mod.ts';
-export let db: DB;
+import { Database } from 'jsr:@db/sqlite';
 
-export const setupDatabase = (): DB => {
-  db = new DB('candidates.db');
+export const initializeCandidateDatabase = (): Database | null => {
+  const database = new Database('candidates.db');
 
   try {
-    db.execute(`
+    database.exec(`
     DROP TABLE IF EXISTS candidates;
 
     CREATE TABLE candidates (
@@ -73,13 +72,16 @@ export const setupDatabase = (): DB => {
     );
     `);
 
-    // Verify database setup
-    const count = db.query('SELECT COUNT(*) FROM candidates')[0][0];
-    console.log(`Database initialized with ${count} candidates`);
-
-    return db;
+    // Check if at least one candidate was inserted into the database
+    const statement = database.prepare('SELECT * FROM candidates LIMIT 1');
+    const row = statement.get();
+    if (row) {
+      return database;
+    } else {
+      throw new Error('No candidates found in the database');
+    }
   } catch (error) {
     console.error('Database setup error:', error);
-    throw error;
+    return null;
   }
 };

@@ -1,12 +1,11 @@
 {
   "tasks": {
-    "dev": "deno run --allow-net --allow-read --allow-write --watch server.ts",
+    "dev": "deno run --allow-net --allow-read --allow-write --allow-env --allow-ffi --watch server.ts",
     "start": "deno run --allow-net --allow-read --allow-write server.ts"
   },
   "imports": {
-    "oak": "https://deno.land/x/oak/mod.ts",
-    "cors": "https://deno.land/x/cors/mod.ts",
-    "sqlite": "https://deno.land/x/sqlite@v3.9.1/mod.ts"
+    "@tajpouria/cors": "jsr:@tajpouria/cors@^1.2.1",
+    "cors": "https://deno.land/x/cors/mod.ts"
   },
   "compileOptions": {
     "strict": "true"
