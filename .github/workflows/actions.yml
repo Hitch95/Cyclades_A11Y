@@ -36,10 +36,15 @@ jobs:
 
     - name: Check if Deno is installed
       run: deno --version
-    
+
     - name: Build step
       working-directory: ./cyclades-server
       run: deno task build
+
+    - name: Debug
+      run: |
+        pwd
+        ls -l
 
     - name: Upload to Deno Deploy
       uses: denoland/deployctl@v1
