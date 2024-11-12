@@ -77,8 +77,11 @@ const MenuPopup: FC<MenuPopupProps> = ({ open, handleClose }) => {
               ))}
             </List>
           </Grid>
-          <Grid size={{ lg: 8 }} sx={{ backgroundColor: '#FAF7F4' }}>
-            <List>
+          <Grid
+            sx={{ backgroundColor: '#FAF7F4' }}
+            size={{ md: 8, lg: 8, xl: 8 }}
+          >
+            <List sx={{ width: '50%' }}>
               {subscriptionItems.map((item, index) => (
                 <ListItem disablePadding key={index}>
                   <ListItemButton
@@ -86,17 +89,18 @@ const MenuPopup: FC<MenuPopupProps> = ({ open, handleClose }) => {
                     href={item.href}
                     sx={{
                       paddingLeft: '2rem',
+                      backgroundColor: '#FAF7F4',
                       '&:hover': {
                         color: '#9C2D41',
                         backgroundColor: 'inherit',
                       },
+                      '& .MuiTypography-root': {
+                        color: 'inherit',
+                      },
                     }}
                   >
-                    <KeyboardArrowRightIcon />
-                    <ListItemText
-                      primary={item.label}
-                      sx={{ paddingLeft: '0.75rem' }}
-                    />
+                    <KeyboardArrowRightIcon sx={{ marginRight: '0.75rem' }} />
+                    <ListItemText primary={item.label} />
                   </ListItemButton>
                 </ListItem>
               ))}

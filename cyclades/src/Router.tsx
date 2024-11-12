@@ -5,6 +5,7 @@ import SignUp from './pages/SignUp';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import HandleSubscription from './pages/HandleSubscription';
+import Search from './pages/Search';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/search',
+    element: <Search />,
   },
   {
     path: '/protected',

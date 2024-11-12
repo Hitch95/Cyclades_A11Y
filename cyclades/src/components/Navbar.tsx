@@ -115,13 +115,16 @@ const Navbar = () => {
             direction="row"
             sx={{ alignItems: 'center', paddingRight: '60px', gap: 4 }}
           >
-            <Button
+            <Link
+              href="/signup"
               sx={{
-                height: '100%',
+                display: 'inline-block',
+                padding: '15px 16px',
                 borderRadius: '0px',
                 fontSize: '20px',
                 textTransform: 'capitalize',
                 color: '#FAF7F4',
+                textDecoration: 'none',
                 background:
                   'linear-gradient(to right, #FAF7F4 50%, #9C2D41 50%)',
                 backgroundSize: '200% 100%',
@@ -130,29 +133,22 @@ const Navbar = () => {
                 '&:hover': {
                   color: 'black',
                   backgroundPosition: '0% 0%',
+                  textDecoration: 'underline',
                 },
               }}
             >
-              <Link
-                href="/signup"
-                color="inherit"
-                sx={{
-                  textDecoration: 'none',
-                  '&:hover': {
-                    textDecoration: 'underline',
-                  },
-                }}
-              >
-                Sign Up
-              </Link>
-            </Button>
-            <Button
+              Sign Up
+            </Link>
+            <Link
+              href="/login"
               sx={{
-                height: '100%',
+                display: 'inline-block',
+                padding: '15px 16px',
                 borderRadius: '0px',
                 fontSize: '20px',
                 textTransform: 'capitalize',
                 color: '#FAF7F4',
+                textDecoration: 'none',
                 background:
                   'linear-gradient(to right, #FAF7F4 50%, #9C2D41 50%)',
                 backgroundSize: '200% 100%',
@@ -161,22 +157,12 @@ const Navbar = () => {
                 '&:hover': {
                   color: 'black',
                   backgroundPosition: '0% 0%',
+                  textDecoration: 'underline',
                 },
               }}
             >
-              <Link
-                href="/login"
-                color="inherit"
-                sx={{
-                  textDecoration: 'none',
-                  '&:hover': {
-                    textDecoration: 'underline',
-                  },
-                }}
-              >
-                Login
-              </Link>
-            </Button>
+              Login
+            </Link>
           </Stack>
         ) : (
           <ListItemText sx={{ marginRight: '60px' }}>

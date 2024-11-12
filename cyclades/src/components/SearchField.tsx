@@ -69,7 +69,7 @@ const SearchField: FC<SearchFieldProps> = ({ onElementClick }) => {
           paddingLeft: '20px',
           marginTop: '0.8rem',
           fontWeight: '600',
-          color: '#9C2D41',
+          color: 'black',
           cursor: 'pointer',
         }}
       >
