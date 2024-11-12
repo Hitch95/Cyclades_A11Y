@@ -41,17 +41,12 @@ jobs:
       working-directory: ./cyclades-server
       run: deno task build
 
-    - name: Debug
-      run: |
-        pwd
-        ls -l
-
     - name: Upload to Deno Deploy
       uses: denoland/deployctl@v1
       with:
-        project: "cyclades"
+        project: "cyclades-server"
         entrypoint: "server.ts"
-        root: "./cyclades-server/"
+        root: "./cyclades-server"
 
     - name: Lint
       run: deno lint
