@@ -44,8 +44,9 @@ jobs:
       uses: denoland/deployctl@v1
       with:
         project: "cyclades-server"
-        entrypoint: "deno run --allow-all --unstable server.ts"
+        entrypoint: "server.ts"
         root: "./cyclades-server"
+        flags: "--unstable --allow-all"
 
     - name: Lint
       run: deno lint
