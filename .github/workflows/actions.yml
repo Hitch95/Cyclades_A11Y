@@ -1,0 +1,79 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [22.9.0]
+    
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+    
+    steps:
+    - name: Clone repository
+      uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    
+    # Deno backend
+    - name: Install Deno
+      uses: denoland/setup-deno@v2
+      with:
+        deno-version: v2.x
+
+    - name: Check if Deno is installed
+      run: deno --version
+    
+    - name: Build step
+      working-directory: ./cyclades-server
+      run: deno task build
+
+    - name: Upload to Deno Deploy
+      uses: denoland/deployctl@v1
+      with:
+        project: "cyclades"
+        entrypoint: "server.ts"
+        root: "."
+
+    - name: Lint
+      run: deno lint
+    
+    # Vite/React frontend
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+    
+    - name: Check if pnpm is installed
+      run: pnpm -v
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+    
+    - name: Install dependencies
+      working-directory: ./cyclades
+      run: pnpm install
+    
+    - name: Lint
+      working-directory: ./cyclades
+      run: pnpm run lint
+    
+    - name: Build
+      working-directory: ./cyclades
+      run: pnpm run build
