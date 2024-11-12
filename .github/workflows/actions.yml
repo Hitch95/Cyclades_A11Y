@@ -46,7 +46,7 @@ jobs:
       with:
         project: "cyclades"
         entrypoint: "server.ts"
-        root: "."
+        root: "./cyclades-server/"
 
     - name: Lint
       run: deno lint
