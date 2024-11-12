@@ -1,5 +1,6 @@
 import { Application, Router } from 'jsr:@oak/oak';
 import { oakCors } from '@tajpouria/cors';
+import 'jsr:@std/dotenv/load';
 
 import candidatesRoute from './route/route.ts';
 
@@ -9,7 +10,7 @@ const PORT = 8000;
 
 app.use(
   oakCors({
-    origin: '*', // In production, replace with your frontend domain
+    origin: 'FRONTEND_URL', // In production, replace with your frontend domain
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     optionsSuccessStatus: 200,

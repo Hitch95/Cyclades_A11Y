@@ -216,7 +216,9 @@ const HomeAcademyForm = () => {
     >
       <TextField
         select
-        aria-describedby=""
+        aria-label="Tell if equal or not equal"
+        aria-labelledby="equal-select-label"
+        aria-describedby="Tell if equal or not equal"
         defaultValue={firstTextfieldItems[0].value}
       >
         {firstTextfieldItems.map((option) => (
@@ -228,7 +230,9 @@ const HomeAcademyForm = () => {
       <TextField
         select
         value={selectedValue}
-        aria-describedby="select your exam names"
+        aria-label="Select your exam"
+        aria-labelledby="exam-select-label"
+        aria-describedby="select your exam"
         helperText="Please select your exam"
         onChange={(event) => setSelectedValue(event.target.value)}
       >

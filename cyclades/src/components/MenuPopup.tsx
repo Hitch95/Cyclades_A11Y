@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface MenuPopupProps {
   open: boolean;
@@ -81,6 +82,19 @@ const MenuPopup: FC<MenuPopupProps> = ({ open, handleClose }) => {
             sx={{ backgroundColor: '#FAF7F4' }}
             size={{ md: 8, lg: 8, xl: 8 }}
           >
+            <CloseIcon
+              sx={{
+                color: 'black',
+                position: 'absolute',
+                top: '165px',
+                right: '80px',
+                cursor: 'pointer',
+                '&:hover': {
+                  color: '#9C2D41',
+                },
+              }}
+              onClick={handleClose}
+            />
             <List sx={{ width: '50%' }}>
               {subscriptionItems.map((item, index) => (
                 <ListItem disablePadding key={index}>
