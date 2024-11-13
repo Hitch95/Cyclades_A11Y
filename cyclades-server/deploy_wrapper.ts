@@ -1,8 +1,14 @@
-// deploy_wrapper.ts
 export {};
 
-const { run } = Deno;
-const p = run({
+const process = Deno.run({
   cmd: ['deno', 'run', '--allow-all', 'deploy.ts'],
+  stdout: 'inherit',
+  stderr: 'inherit',
 });
-await p.status();
+
+const status = await process.status();
+process.close();
+
+if (!status.success) {
+  Deno.exit(status.code);
+}
