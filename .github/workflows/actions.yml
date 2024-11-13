@@ -47,7 +47,6 @@ jobs:
         entrypoint: "deploy.ts"
         root: "./cyclades-server"
         import-map: "./cyclades-server/deno.json"
-        flags: "--allow-ffi --unstable"
 
     - name: Lint
       run: deno lint

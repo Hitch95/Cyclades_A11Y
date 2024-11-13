@@ -1,9 +1,9 @@
-import { Database } from 'jsr:@db/sqlite';
+import { DB } from 'https://deno.land/x/sqlite@v3.9.1/mod.ts';
 
-export const initializeCandidateDatabase = (): Database | null => {
-  const database = new Database('candidates.db');
+export const initializeCandidateDatabase = (): DB | null => {
+  const database = new DB('candidates.db');
   try {
-    database.exec(`    
+    database.execute(`
     -- First drop the view since it depends on all tables
     DROP VIEW IF EXISTS candidate_details;
     
@@ -268,9 +268,8 @@ export const initializeCandidateDatabase = (): Database | null => {
     `);
 
     // Check if at least one candidate was inserted into the database
-    const statement = database.prepare('SELECT * FROM candidates LIMIT 1');
-    const row = statement.get();
-    if (row) {
+    const rows = database.query('SELECT * FROM candidates LIMIT 1');
+    if (rows.length > 0) {
       return database;
     } else {
       throw new Error('No candidates found in the database');
