@@ -1,3 +1,5 @@
+import { type Row } from 'https://deno.land/x/sqlite@v3.9.1/mod.ts';
+
 import { initializeCandidateDatabase } from '../database.ts';
 import { Candidate, Position, ArtisticTeaching } from '../types.ts';
 
@@ -7,9 +9,7 @@ export const getAllCandidates = () => {
   if (!database) {
     throw new Error('Database is not initialized');
   }
-  return database
-    .prepare(
-      `
+  return database.query(`
     SELECT 
       c.*,
       p.name as position_name,
@@ -17,9 +17,7 @@ export const getAllCandidates = () => {
     FROM candidates c
     LEFT JOIN positions p ON c.position_id = p.id
     LEFT JOIN artistic_teachings at ON c.artistic_teaching_id = at.id
-  `
-    )
-    .all();
+  `);
 };
 
 export const getCandidateById = (id: string) => {
@@ -27,20 +25,19 @@ export const getCandidateById = (id: string) => {
     throw new Error('Database is not initialized');
   }
   const idNumber = parseInt(id);
-  return database
-    .prepare(
-      `
-      SELECT 
-        c.*,
-        p.name as position_name,
-        at.name as artistic_teaching_name
-      FROM candidates c
-      LEFT JOIN positions p ON c.position_id = p.id
-      LEFT JOIN artistic_teachings at ON c.artistic_teaching_id = at.id
-      WHERE c.id = ?
+  return database.query(
     `
-    )
-    .get(idNumber);
+    SELECT 
+      c.*,
+      p.name as position_name,
+      at.name as artistic_teaching_name
+    FROM candidates c
+    LEFT JOIN positions p ON c.position_id = p.id
+    LEFT JOIN artistic_teachings at ON c.artistic_teaching_id = at.id
+    WHERE c.id = ?
+  `,
+    [idNumber]
+  )[0];
 };
 
 export const addOneCandidate = (candidate: Candidate) => {
@@ -72,8 +69,7 @@ export const addOneCandidate = (candidate: Candidate) => {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
   `;
 
-  const statement = database.prepare(query);
-  statement.run(
+  database.query(query, [
     candidate.candidate_number,
     candidate.inscription_number,
     candidate.lastname,
@@ -93,8 +89,8 @@ export const addOneCandidate = (candidate: Candidate) => {
     candidate.state,
     candidate.qualification,
     candidate.position_id,
-    candidate.artistic_teaching_id
-  );
+    candidate.artistic_teaching_id,
+  ]);
 
   // Return the ID of the new candidate
   return database.lastInsertRowId;
@@ -105,14 +101,24 @@ export const getAllPositions = () => {
   if (!database) {
     throw new Error('Database is not initialized');
   }
-  return database.prepare('SELECT * FROM positions').all() as Position[];
+  const rows = database.query(
+    'SELECT position_id, position_name FROM positions'
+  );
+  return rows.map((row: Row) => ({
+    id: row[0] as number | null,
+    name: row[1] as 'Inscrit' | 'Non inscrit' | null,
+  })) as Position[];
 };
 
 export const getAllArtisticTeachings = () => {
   if (!database) {
     throw new Error('Database is not initialized');
   }
-  return database
-    .prepare('SELECT * FROM artistic_teachings')
-    .all() as ArtisticTeaching[];
+  const rows = database.query(
+    'SELECT artistic_teaching_id, artistic_teaching_name FROM artistic_teachings'
+  );
+  return rows.map((row: Row) => ({
+    id: row[0] as number | null,
+    name: row[1] as ArtisticTeaching['name'],
+  })) as ArtisticTeaching[];
 };
