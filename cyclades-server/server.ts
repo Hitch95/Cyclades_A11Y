@@ -6,7 +6,6 @@ import candidatesRoute from './route/route.ts';
 
 const app = new Application();
 const router = new Router();
-const PORT = 8000;
 
 app.use(
   oakCors({
@@ -25,10 +24,6 @@ app.use((ctx) => {
   ctx.response.status = 404;
   ctx.response.body = { error: 'Not Found' };
 });
-
-console.log(`Server is running on http://localhost:${PORT}`);
-
-await app.listen({ port: PORT });
 
 // Export the app instance for testing
 export default app;

@@ -26,30 +26,17 @@ jobs:
       - name: Check if Deno is installed
         run: deno --version
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-        
-      - name: Check if pnpm is installed
-        run: pnpm -v
-        
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-        
-      - name: Install dependencies
-        working-directory: ./cyclades-server
-        run: pnpm install
-
       - name: Build step
-        run: "pnpm run build"
-
+        working-directory: ./cyclades-server
+        run: deno task build
+  
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "cyclades-server"
-          entrypoint: "server.ts"
+          entrypoint: "deno run --allow-all --unstable server.ts"
           root: "./cyclades-server"
+  
+      - name: Lint
+        run: deno lint
+        
