@@ -46,7 +46,7 @@ jobs:
       uses: denoland/deployctl@v1
       with:
         project: "cyclades-server"
-        entrypoint: "deploy.ts"
+        entrypoint: "deploy_wrapper.ts"
         root: "./cyclades-server"
 
     - name: Lint
