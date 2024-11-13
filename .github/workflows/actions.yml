@@ -46,7 +46,6 @@ jobs:
         project: "cyclades-server"
         entrypoint: "deploy.ts"
         root: "./cyclades-server"
-        import-map: "./cyclades-server/deno.json"
 
     - name: Lint
       run: deno lint
