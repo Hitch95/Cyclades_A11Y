@@ -54,24 +54,19 @@ jobs:
     #   run: deno lint
     
     # Vite/React frontend
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
+
+    - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v4
+
+      name: Install pnpm
       with:
         version: 9
-    
-    - name: Check if pnpm is installed
-      run: pnpm -v
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
-    
-    - name: Install dependencies
-      working-directory: ./cyclades
-      run: pnpm install
-    
+    - run: pnpm install
+
     - name: Lint
       working-directory: ./cyclades
       run: pnpm run lint
