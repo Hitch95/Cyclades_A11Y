@@ -1,10 +1,10 @@
-import { initializeCandidateDatabase } from '../database.ts';
-import { Candidate, Position, ArtisticTeaching } from '../types.ts';
+import { initializeCandidateDatabase } from "../database.ts";
+import { ArtisticTeaching, Candidate, Position } from "../types.ts";
 
 const supabase = initializeCandidateDatabase();
 
 export const getAllCandidates = async () => {
-  const { data, error } = await supabase.from('candidate_details').select('*');
+  const { data, error } = await supabase.from("candidate_details").select("*");
 
   if (error) throw error;
   return data;
@@ -12,9 +12,9 @@ export const getAllCandidates = async () => {
 
 export const getCandidateById = async (id: string) => {
   const { data, error } = await supabase
-    .from('candidate_details')
-    .select('*')
-    .eq('id', id)
+    .from("candidate_details")
+    .select("*")
+    .eq("id", id)
     .single();
 
   if (error) throw error;
@@ -23,7 +23,7 @@ export const getCandidateById = async (id: string) => {
 
 export const addOneCandidate = async (candidate: Partial<Candidate>) => {
   const { data, error } = await supabase
-    .from('candidates')
+    .from("candidates")
     .insert([candidate])
     .select();
 
@@ -33,12 +33,12 @@ export const addOneCandidate = async (candidate: Partial<Candidate>) => {
 
 export const updateCandidate = async (
   id: number,
-  updates: Partial<Candidate>
+  updates: Partial<Candidate>,
 ) => {
   const { data, error } = await supabase
-    .from('candidates')
+    .from("candidates")
     .update(updates)
-    .eq('id', id)
+    .eq("id", id)
     .select();
 
   if (error) throw error;
@@ -46,7 +46,7 @@ export const updateCandidate = async (
 };
 
 export const getAllPositions = async () => {
-  const { data, error } = await supabase.from('positions').select('id, name');
+  const { data, error } = await supabase.from("positions").select("id, name");
 
   if (error) throw error;
   return data as Position[];
@@ -54,8 +54,8 @@ export const getAllPositions = async () => {
 
 export const getAllArtisticTeachings = async () => {
   const { data, error } = await supabase
-    .from('artistic_teachings')
-    .select('id, name');
+    .from("artistic_teachings")
+    .select("id, name");
 
   if (error) throw error;
   return data as ArtisticTeaching[];

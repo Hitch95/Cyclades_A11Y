@@ -25,17 +25,17 @@ export interface Candidate {
 
 export interface Position {
   id: number;
-  name: 'Inscrit' | 'Non inscrit';
+  name: "Inscrit" | "Non inscrit";
 }
 
 export interface ArtisticTeaching {
   id: number;
   name:
-    | 'Art - Cinéma audiovisuel'
-    | 'Art - Histoire des arts'
-    | 'Art - Théâtre'
-    | 'Art - Arts du cirque'
-    | 'Art - Musique'
-    | 'Art - Danse'
-    | 'Art - Arts plastiques';
+    | "Art - Cinéma audiovisuel"
+    | "Art - Histoire des arts"
+    | "Art - Théâtre"
+    | "Art - Arts du cirque"
+    | "Art - Musique"
+    | "Art - Danse"
+    | "Art - Arts plastiques";
 }
