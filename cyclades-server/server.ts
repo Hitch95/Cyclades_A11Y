@@ -9,12 +9,15 @@ const router = new Router();
 
 app.use(
   oakCors({
-    origin: 'FRONTEND_URL', // In production, replace with your frontend domain
+    origin: '*',
+    // origin: Deno.env.get('FRONTEND_URL'), // In production, replace with your frontend domain
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     optionsSuccessStatus: 200,
   })
 );
+
+// Routes
 app.use(router.routes());
 app.use(router.allowedMethods());
 candidatesRoute(router);

@@ -22,32 +22,48 @@ const candidatesRoute = (router: Router) => {
   });
 
   // Get all candidates
-  router.get(basePath + '/candidates', (ctx) => {
-    const candidates = getAllCandidates();
-    ctx.response.body = candidates;
+  router.get(basePath + '/candidates', async (ctx) => {
+    try {
+      const candidates = await getAllCandidates();
+      ctx.response.body = candidates;
+    } catch (error) {
+      ctx.response.status = 500;
+      ctx.response.body = {
+        message: 'Error fetching candidates',
+        error: (error as Error).message,
+      };
+    }
   });
 
-  // Get specific candidate by ID
-  router.get(basePath + '/candidate/:id', (ctx) => {
+  // Get a specific candidate by ID
+  router.get(basePath + '/candidate/:id', async (ctx) => {
     const id = ctx.params.id;
-    const candidate = getCandidateById(id);
-
-    if (candidate) {
-      ctx.response.body = candidate;
-    } else {
-      ctx.response.status = 204; // No Content for invalid ID
+    try {
+      const candidate = await getCandidateById(id);
+      if (candidate) {
+        ctx.response.body = candidate;
+      } else {
+        ctx.response.status = 404; // Not Found for invalid ID
+        ctx.response.body = { message: 'Candidate not found' };
+      }
+    } catch (error) {
+      ctx.response.status = 500;
+      ctx.response.body = {
+        message: 'Error fetching candidate',
+        error: (error as Error).message,
+      };
     }
   });
 
   // Add a new candidate
   router.post(basePath + '/candidates', async (ctx) => {
-    const candidate: Candidate = await ctx.request.body.json();
     try {
-      const lastId = addOneCandidate(candidate);
-      ctx.response.status = 201; // Created status
-      ctx.response.body = { ...candidate, id: lastId };
+      const candidate: Candidate = await ctx.request.body.json();
+      const newCandidate = await addOneCandidate(candidate);
+      ctx.response.status = 201;
+      ctx.response.body = newCandidate;
     } catch (error: unknown) {
-      ctx.response.status = 500; // Internal Server Error
+      ctx.response.status = 500;
       ctx.response.body = {
         message: 'Error while adding the new candidate',
         error: (error as Error).message,
@@ -56,15 +72,31 @@ const candidatesRoute = (router: Router) => {
   });
 
   // Get all positions
-  router.get(basePath + '/positions', (ctx) => {
-    const positions = getAllPositions();
-    ctx.response.body = positions;
+  router.get(basePath + '/positions', async (ctx) => {
+    try {
+      const positions = await getAllPositions();
+      ctx.response.body = positions;
+    } catch (error) {
+      ctx.response.status = 500;
+      ctx.response.body = {
+        message: 'Error fetching positions',
+        error: (error as Error).message,
+      };
+    }
   });
 
   // Get all artistic teachings
-  router.get(basePath + '/artistic-teachings', (ctx) => {
-    const artisticTeachings = getAllArtisticTeachings();
-    ctx.response.body = artisticTeachings;
+  router.get(basePath + '/artistic-teachings', async (ctx) => {
+    try {
+      const artisticTeachings = await getAllArtisticTeachings();
+      ctx.response.body = artisticTeachings;
+    } catch (error) {
+      ctx.response.status = 500;
+      ctx.response.body = {
+        message: 'Error fetching artistic teachings',
+        error: (error as Error).message,
+      };
+    }
   });
 };
 
