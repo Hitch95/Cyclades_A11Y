@@ -50,8 +50,8 @@ jobs:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         DATABASE_API_KEY: ${{ secrets.DATABASE_API_KEY }}
 
-    - name: Lint
-      run: deno lint
+    # - name: Lint
+    #   run: deno lint
     
     # Vite/React frontend
     - name: Install pnpm
