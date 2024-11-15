@@ -56,41 +56,29 @@ jobs:
     # Vite/React frontend
     - uses: actions/checkout@v4
 
-    - name: List root directory contents
-      run: ls -la
+    - name: Print current working directory
+      run: pwd
 
-    - name: List cyclades directory contents (if it exists)
-      run: |
-       if [ -d "./cyclades" ]; then
-        ls -la ./cyclades
-       else
-        echo "cyclades directory does not exist"
-       fi
+    - name: List directory contents
+      run: ls -ls
 
     - uses: pnpm/action-setup@v4
-
       name: Install pnpm
       with:
         version: 9
+
+    - name: Check pnpm version
+      run: pnpm --version
+
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
+        cache-dependency-path: './cyclades/pnpm-lock.yaml'
 
-    - name: Print current working directory
-      run: pwd
-
-    - name: Check for pnpm-lock.yaml
-      run: |
-        if [ -f "pnpm-lock.yaml" ]; then
-          echo "pnpm-lock.yaml found in current directory"
-        else
-          echo "pnpm-lock.yaml not found in current directory"
-          echo "Searching for pnpm-lock.yaml in subdirectories:"
-          find . -name "pnpm-lock.yaml"
-        fi
-
-    - run: pnpm install
+    - name: Install dependencies
+      working-directory: ./cyclades
+      run: pnpm install
 
     # - name: Lint
     #   working-directory: ./cyclades
