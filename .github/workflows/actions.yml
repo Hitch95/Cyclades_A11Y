@@ -80,10 +80,12 @@ jobs:
       working-directory: ./cyclades
       run: pnpm install
 
-    # - name: Lint
-    #   working-directory: ./cyclades
-    #   run: pnpm run lint
+    - name: Lint
+      working-directory: ./cyclades
+      run: pnpm run lint
     
-    # - name: Build
-    #   working-directory: ./cyclades
-    #   run: pnpm run build
+    - name: Build
+      working-directory: ./cyclades
+      run: pnpm run build
+      env:
+        VITE_BACKEND_URL: ${{ secrets.BACKEND_URL }}

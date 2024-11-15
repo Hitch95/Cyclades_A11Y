@@ -6,7 +6,7 @@ export interface Position {
 }
 
 export interface ArtisticTeaching {
-  id: number;
+  id: number | null;
   name:
     | 'Art - Cinéma audiovisuel'
     | 'Art - Histoire des arts'
@@ -26,12 +26,15 @@ const ArtisticTeaching = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const positionsData = await fetch('/api/positions').then((res) =>
-        res.json(),
+      const backendUrl = import.meta.env.PROD
+        ? import.meta.env.VITE_BACKEND_URL
+        : 'http://localhost:8000';
+      const positionsData = await fetch(`${backendUrl}/api/positions`).then(
+        (res) => res.json(),
       );
-      const teachingsData = await fetch('/api/artistic-teachings').then((res) =>
-        res.json(),
-      );
+      const teachingsData = await fetch(
+        `${backendUrl}/api/artistic-teachings`,
+      ).then((res) => res.json());
       setPositions(positionsData);
       setArtisticTeachings(teachingsData);
     };
@@ -40,7 +43,7 @@ const ArtisticTeaching = () => {
 
   const [formData, setFormData] = useState<{
     position_id: number;
-    artistic_teaching_id: null;
+    artistic_teaching_id: number | null;
   }>({
     position_id: 0,
     artistic_teaching_id: null,
@@ -66,17 +69,13 @@ const ArtisticTeaching = () => {
         onChange={(e) =>
           setFormData({
             ...formData,
-            artistic_teaching_id: e.target.value
-              ? Number(e.target.value)
-              : null,
+            artistic_teaching_id: Number(e.target.value) || null,
           })
         }
       >
         <option value="">Select Teaching</option>
         {artisticTeachings.map((teaching) => (
-          <option key={teaching.id} value={teaching.id}>
-            {teaching.name}
-          </option>
+          <option key={teaching.id}>{teaching.name}</option>
         ))}
       </select>
     </>

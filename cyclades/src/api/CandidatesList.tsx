@@ -28,7 +28,7 @@ type CandidateListProps = {
 };
 
 const CandidatesList = ({ onCandidatesFetched }: CandidateListProps) => {
-  const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [_, setCandidates] = useState<Candidate[]>([]);
 
   useEffect(() => {
     const fetchCandidates = async () => {
