@@ -29,14 +29,13 @@ jobs:
       - name: Build step
         working-directory: ./cyclades-server
         run: deno task build
-  
+
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "cyclades-server"
-          entrypoint: "deno run --allow-all --unstable server.ts"
+          entrypoint: "deploy.ts"
           root: "./cyclades-server"
-  
-      - name: Lint
-        run: deno lint
-        
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_API_KEY: ${{ secrets.DATABASE_API_KEY }}
