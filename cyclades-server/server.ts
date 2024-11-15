@@ -7,12 +7,15 @@ import candidatesRoute from './route/route.ts';
 const app = new Application();
 const router = new Router();
 
-const frontendUrl = Deno.env.get('FRONTEND_URL');
-const origin = frontendUrl ? frontendUrl : '*';
+// Load the environment variables
+const frontendUrl = Deno.env.get('FRONTEND_URL') || '*';
+console.log('Running in environment:', Deno.env.get('DENO_ENV'));
+console.log('Frontend URL:', frontendUrl);
 
 app.use(
   oakCors({
-    origin: origin, // In production, replace with your frontend domain
+    // origin: "*",
+    origin: frontendUrl, // In production, replace with the frontend domain
     methods: ['GET', 'POST', 'PUT'],
     allowedHeaders: ['Content-Type'],
     optionsSuccessStatus: 200,

@@ -32,7 +32,11 @@ const CandidatesList = ({ onCandidatesFetched }: CandidateListProps) => {
 
   useEffect(() => {
     const fetchCandidates = async () => {
-      const response = await fetch('/api/candidates');
+      const backendUrl = import.meta.env.PROD
+        ? import.meta.env.VITE_BACKEND_URL
+        : 'http://127.0.0.1:8000';
+      console.log(backendUrl);
+      const response = await fetch(`${backendUrl}/api/candidates`);
       if (response.ok) {
         const data = await response.text();
 
