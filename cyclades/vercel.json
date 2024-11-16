@@ -1,3 +1,23 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "version": 2,
+  "builds": [
+    {
+      "src": "cyclades/package.json",
+      "use": "@vercel/static-build"
+    },
+    {
+      "src": "cyclades-server/deploy.ts",
+      "use": "@vercel/deno"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/cyclades-server/deploy.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/cyclades/$1"
+    }
+  ]
 }
