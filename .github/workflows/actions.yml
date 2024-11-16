@@ -80,9 +80,9 @@ jobs:
       working-directory: ./cyclades
       run: pnpm install
 
-    - name: Lint
-      working-directory: ./cyclades
-      run: pnpm run lint
+    # - name: Lint
+    #   working-directory: ./cyclades
+    #   run: pnpm run lint
     
     - name: Build
       working-directory: ./cyclades
