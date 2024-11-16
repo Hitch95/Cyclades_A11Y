@@ -20,7 +20,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/cyclades/index.html"
+      "dest": "/index.html"
     }
   ]
 }
