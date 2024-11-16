@@ -17,7 +17,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/cyclades/$1"
+      "dest": "/cyclades/index.html"
     }
   ]
 }
