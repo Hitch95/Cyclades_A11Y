@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "functions": {
-    "cyclades-server/api/**/*.[jt]s": { "runtime": "vercel-deno@3.1.0" }
-  },
+  "name": "cyclades",
   "builds": [
     {
       "src": "cyclades/package.json",
