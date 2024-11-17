@@ -5,12 +5,11 @@
     {
       "src": "cyclades/package.json",
       "use": "@vercel/static-build"
-    },
-    {
-      "src": "cyclades-server/deploy.ts",
-      "use": "@vercel/deno"
     }
   ],
+  "functions": {
+    "cyclades-server/deploy.ts": { "runtime": "vercel-deno@3.1.0" }
+  },
   "routes": [
     {
       "src": "/api/(.*)",
