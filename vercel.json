@@ -1,20 +1,12 @@
 {
-  "version": 2,
-  "name": "cyclades",
-  "builds": [
+  "rewrites": [
     {
-      "src": "cyclades/package.json",
-      "use": "@vercel/static-build"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "https://cyclades-server-9j62x1k0tpd6.deno.dev/api/$1"
+      "source": "/api/(.*)",
+      "destination": "https://cyclades-server-9j62x1k0tpd6.deno.dev/api/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/dist/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
