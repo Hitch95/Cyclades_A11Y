@@ -7,9 +7,6 @@
       "use": "@vercel/static-build"
     }
   ],
-  "functions": {
-    "cyclades-server/deploy.ts": { "runtime": "vercel-deno@3.1.0" }
-  },
   "routes": [
     {
       "src": "/api/(.*)",
