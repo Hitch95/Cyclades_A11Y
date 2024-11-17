@@ -52,4 +52,4 @@ The design for this project is created using [Figma](https://www.figma.com/desig
 
 ## Contact
 
-For any questions or feedback, you can contact me in my [LinkedIn](www.linkedin.com/in/bahloul-moufidi).
+For any questions or feedback, you can contact me in my [LinkedIn](https://www.linkedin.com/in/bahloul-moufidi).
