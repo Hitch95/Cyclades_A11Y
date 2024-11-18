@@ -1,27 +1,5 @@
 import { useEffect, useState } from 'react';
-
-export interface Candidate {
-  id: number;
-  candidate_number: string;
-  inscription_number: string;
-  lastname: string;
-  firstname: string;
-  email: string;
-  birthdate: string;
-  country_of_birth: string;
-  city_of_birth: string;
-  gender: string;
-  nationality: string;
-  phone_number: string;
-  country: string;
-  city: string;
-  school_postal_code: string;
-  school_code: string;
-  class_division: string | null;
-  state: string;
-  qualification: string;
-  created: string;
-}
+import { Candidate } from '../types';
 
 type CandidateListProps = {
   onCandidatesFetched: (candidates: Candidate[]) => void;
@@ -32,31 +10,36 @@ const CandidatesList = ({ onCandidatesFetched }: CandidateListProps) => {
 
   useEffect(() => {
     const fetchCandidates = async () => {
-      const backendUrl = import.meta.env.PROD
-        ? import.meta.env.VITE_BACKEND_URL
-        : 'http://127.0.0.1:8000';
-      console.log(backendUrl);
-      const response = await fetch(`${backendUrl}/api/candidates`);
-      if (response.ok) {
-        const data = await response.text();
+      try {
+        const backendUrl =
+          import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+        console.log('Backend URL:', backendUrl);
 
-        try {
-          const jsonData = JSON.parse(data);
-          console.log('JSON Data:', jsonData);
-          setCandidates(jsonData);
-          onCandidatesFetched(jsonData);
-        } catch (error) {
-          console.error('Erreur while parsing to JSON format:', error);
+        const response = await fetch(`${backendUrl}/api/candidates`, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } else {
-        console.error('Failed to fetch candidates');
+
+        const data = await response.json();
+        console.log('Response data:', data);
+
+        setCandidates(data);
+        onCandidatesFetched(data);
+      } catch (error) {
+        console.error('Error fetching candidates:', error);
       }
     };
 
     fetchCandidates();
   }, []);
 
-  return <></>;
+  return null;
 };
 
 export default CandidatesList;
