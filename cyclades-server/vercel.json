@@ -1,6 +1,7 @@
 {
   "functions": {
-    "api/deploy.ts": {
+    "api/**/*.ts": {
+      "runtime": "vercel-dev-builder@0.0.5",
       "memory": 1024,
       "maxDuration": 10
     }
