@@ -1,8 +1,8 @@
 {
   "tasks": {
-    "dev": "deno run --allow-all --watch deploy.ts",
-    "start": "deno run --allow-all deploy.ts",
-    "build": "deno compile --allow-all deploy.ts",
+    "dev": "deno run --allow-all --watch api/deploy.ts",
+    "start": "deno run --allow-all api/deploy.ts",
+    "build": "deno compile --allow-all api/deploy.ts",
     "lint": "deno lint"
   },
   "imports": {
@@ -14,6 +14,12 @@
     "@tajpouria/cors": "jsr:@tajpouria/cors@^1.2.1"
   },
   "compileOptions": {
-    "strict": "true"
+    "strict": "true",
+    "target": "ESNext",
+    "rootDir": "./api",
+    "resolveJsonModule": true,
+    "outDir": "./build",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   }
 }
