@@ -7,15 +7,14 @@ import candidatesRoute from './route/route.ts';
 const app = new Application();
 const router = new Router();
 
-// Load the environment variables
-const frontendUrl = Deno.env.get('FRONTEND_URL') || '*';
-console.log('Running in environment:', Deno.env.get('DENO_ENV'));
-console.log('Frontend URL:', frontendUrl);
-
 app.use(
   oakCors({
-    // origin: "*",
-    origin: frontendUrl, // In production, replace with the frontend domain
+    origin: (origin) => {
+      if (origin?.includes('vercel.app') || origin?.includes('localhost')) {
+        return origin;
+      }
+      return false;
+    }, // In production, replace with the frontend domain
     methods: ['GET', 'POST', 'PUT'],
     allowedHeaders: ['Content-Type'],
     optionsSuccessStatus: 200,
