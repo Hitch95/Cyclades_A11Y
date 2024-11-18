@@ -1,4 +1,4 @@
-import app from './server.ts';
+import app from '../server.ts';
 
 export default async (request: Request) => {
   const databaseUrl = Deno.env.get('DATABASE_URL');
