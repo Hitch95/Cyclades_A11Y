@@ -1,18 +1,19 @@
 import app from './server.ts';
 
-// Export Deno Deploy handler
-export default {
-  async fetch(request: Request, env: Record<string, string>) {
-    // Set environment variables if they're passed from Deno Deploy
-    if (env.DATABASE_URL) Deno.env.set('DATABASE_URL', env.DATABASE_URL);
-    if (env.DATABASE_API_KEY) {
-      Deno.env.set('DATABASE_API_KEY', env.DATABASE_API_KEY);
-    }
+export default async (request: Request) => {
+  const databaseUrl = Deno.env.get('DATABASE_URL');
+  const databaseApiKey = Deno.env.get('DATABASE_API_KEY');
 
-    return (
-      (await app.handle(request)) ?? new Response('Not Found', { status: 404 })
-    );
-  },
+  if (databaseUrl) {
+    Deno.env.set('DATABASE_URL', databaseUrl);
+  }
+  if (databaseApiKey) {
+    Deno.env.set('DATABASE_API_KEY', databaseApiKey);
+  }
+
+  return (
+    (await app.handle(request)) ?? new Response('Not Found', { status: 404 })
+  );
 };
 
 // If running locally, start the server
