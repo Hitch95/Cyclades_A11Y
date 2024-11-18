@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Candidate } from '../api/CandidatesList';
+import { Candidate } from '../types';
 import { styled } from '@mui/material/styles';
 import {
   Table,
