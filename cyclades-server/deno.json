@@ -12,14 +12,5 @@
     "fmt/": "https://deno.land/std@0.224.0/fmt/",
     "@std/fs": "jsr:@std/fs@^1.0.5",
     "@tajpouria/cors": "jsr:@tajpouria/cors@^1.2.1"
-  },
-  "compileOptions": {
-    "strict": "true",
-    "target": "ESNext",
-    "rootDir": "./api",
-    "resolveJsonModule": true,
-    "outDir": "./build",
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
   }
 }

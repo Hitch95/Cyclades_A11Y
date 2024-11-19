@@ -6,15 +6,11 @@ import candidatesRoute from './route/route.ts';
 
 const app = new Application();
 const router = new Router();
+const frontendUrl = Deno.env.get('FRONTEND_URL');
 
 app.use(
   oakCors({
-    origin: (origin) => {
-      if (origin?.includes('vercel.app') || origin?.includes('localhost')) {
-        return origin;
-      }
-      return false;
-    }, // In production, replace with the frontend domain
+    origin: frontendUrl,
     methods: ['GET', 'POST', 'PUT'],
     allowedHeaders: ['Content-Type'],
     optionsSuccessStatus: 200,
@@ -22,9 +18,9 @@ app.use(
 );
 
 // Routes
+candidatesRoute(router);
 app.use(router.routes());
 app.use(router.allowedMethods());
-candidatesRoute(router);
 
 // 404 handler for unmatched routes
 app.use((ctx) => {
