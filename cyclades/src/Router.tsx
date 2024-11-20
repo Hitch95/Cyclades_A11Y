@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import HandleSubscription from './pages/HandleSubscription';
 import Search from './pages/Search';
+import CandidatePage from './pages/Candidate';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: '/search',
     element: <Search />,
+  },
+  {
+    path: '/candidate/:id',
+    element: <CandidatePage />,
   },
   {
     path: '/protected',

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Candidate } from '../types';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import {
   Table,
@@ -12,10 +12,11 @@ import {
   Paper,
 } from '@mui/material';
 
+import { Candidate } from '../types';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import CandidatesList from '../api/CandidatesList';
 import ArtisticTeaching from '../components/ArtisticTeaching';
+import { fetchAllCandidates } from '../api/utils';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,6 +29,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:hover': {
+    cursor: 'pointer',
+    outline: '2px solid black',
+  },
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
@@ -39,10 +44,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const Search = () => {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const navigate = useNavigate();
 
   const handleCandidatesFetched = (fetchedCandidates: Candidate[]) => {
     setCandidates(fetchedCandidates);
   };
+
+  const handleCandidateClick = (id: number) => {
+    navigate(`/candidate/${id}`);
+  };
+
+  useEffect(() => {
+    fetchAllCandidates()
+      .then((fetchedCandidates) => {
+        handleCandidatesFetched(fetchedCandidates);
+      })
+      .catch((error) => {
+        console.error('Error fetching candidates:', error);
+      });
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -74,7 +95,10 @@ const Search = () => {
             </TableHead>
             <TableBody>
               {candidates.map((candidate) => (
-                <StyledTableRow key={candidate.id}>
+                <StyledTableRow
+                  key={candidate.id}
+                  onClick={() => handleCandidateClick(candidate.id)}
+                >
                   <StyledTableCell component="th" scope="row">
                     {candidate.candidate_number}
                   </StyledTableCell>
@@ -107,7 +131,6 @@ const Search = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <CandidatesList onCandidatesFetched={handleCandidatesFetched} />
         <ArtisticTeaching />
       </main>
       <Footer />
