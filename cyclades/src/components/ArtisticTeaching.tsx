@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { fetchAllArtisticTeachings, fetchAllPositions } from '../api/utils';
 
 export interface Position {
   id: number;
@@ -19,26 +20,14 @@ export interface ArtisticTeaching {
 
 const ArtisticTeaching = () => {
   // Frontend component
-  const [positions, setPositions] = useState<Position[]>([]);
-  const [artisticTeachings, setArtisticTeachings] = useState<
+  const [positions, _setPositions] = useState<Position[]>([]);
+  const [artisticTeachings, _setArtisticTeachings] = useState<
     ArtisticTeaching[]
   >([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const backendUrl = import.meta.env.PROD
-        ? import.meta.env.VITE_BACKEND_URL
-        : 'http://localhost:8000';
-      const positionsData = await fetch(`${backendUrl}/api/positions`).then(
-        (res) => res.json(),
-      );
-      const teachingsData = await fetch(
-        `${backendUrl}/api/artistic-teachings`,
-      ).then((res) => res.json());
-      setPositions(positionsData);
-      setArtisticTeachings(teachingsData);
-    };
-    fetchData();
+    fetchAllPositions();
+    fetchAllArtisticTeachings();
   }, []);
 
   const [formData, setFormData] = useState<{

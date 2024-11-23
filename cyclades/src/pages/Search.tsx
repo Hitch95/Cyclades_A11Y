@@ -15,7 +15,6 @@ import {
 import { Candidate } from '../types';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import ArtisticTeaching from '../components/ArtisticTeaching';
 import { fetchAllCandidates } from '../api/utils';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -131,7 +130,6 @@ const Search = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <ArtisticTeaching />
       </main>
       <Footer />
     </>
