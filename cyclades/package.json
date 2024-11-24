@@ -16,6 +16,7 @@
     "@mui/icons-material": "^6.1.5",
     "@mui/lab": "6.0.0-beta.16",
     "@mui/material": "^6.1.5",
+    "@mui/x-data-grid": "^7.22.3",
     "@toolpad/core": "^0.8.1",
     "react": "19.0.0-rc-cae764ce-20241025",
     "react-dom": "19.0.0-rc-cae764ce-20241025",
