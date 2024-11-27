@@ -46,11 +46,13 @@ Supabase is used in this project for:
 To set up Supabase:
 1. Create a Supabase account and start a new project.
 2. Copy your Supabase project URL and API key.
-3. Add these credentials in your .env file:
+3. Add these credentials in your .env file (check .env.exemple) :
 
 ```bash
-SUPABASE_URL=your_supabase_project_url 
-SUPABASE_KEY=your_supabase_api_key
+FRONTEND_URL="your_frontend_url"    #can be localhost
+
+SUPABASE_URL="your_supabase_project_url" 
+SUPABASE_KEY="your_supabase_api_key"
 ```
 
 4. Install the Supabase client in your project: `npm install @supabase/supabase-js`
