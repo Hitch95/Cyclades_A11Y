@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: '/handleSubscription',
+    path: '/handle-subscription',
     element: <HandleSubscription />,
   },
   {

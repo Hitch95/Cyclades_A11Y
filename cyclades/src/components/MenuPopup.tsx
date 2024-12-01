@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
+  Button,
   List,
   ListItem,
   ListItemButton,
@@ -10,6 +11,8 @@ import {
 import Grid from '@mui/material/Grid2';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CloseIcon from '@mui/icons-material/Close';
+import theme from '../theme';
+import { MENU_CONFIG } from '../types';
 
 interface MenuPopupProps {
   open: boolean;
@@ -17,31 +20,7 @@ interface MenuPopupProps {
 }
 
 const MenuPopup: FC<MenuPopupProps> = ({ open, handleClose }) => {
-  const menuItems = [
-    { label: 'Accueil' },
-    { label: 'Administration' },
-    { label: 'Reglementation' },
-    { label: 'Inscription' },
-    { label: 'Orga-Affectation' },
-    { label: 'Déroulement' },
-    { label: 'Evaluation (Désactivé en Prod)' },
-    { label: 'Délibération (Désactivé en Prod)' },
-    { label: 'Publication (Désactivé en Prod)' },
-    { label: 'Fin de session (Désactivé en Prod)' },
-    { label: 'Document' },
-  ];
-
-  const subscriptionItems = [
-    { label: `Gérer les services d'inscription` },
-    { label: 'Gérer les inscriptions', href: '/handleSubscription' },
-    { label: 'Gérer les mesures handicap' },
-    { label: 'Editer des listes de candidatures' },
-    { label: 'Editer liste des candidats allophones' },
-    { label: 'Editer des confirmations d’inscription' },
-    { label: 'Gérer les pièces justificatives' },
-    { label: 'Editer des statistiques' },
-    { label: 'Editer statistiques générales simples' },
-  ];
+  const [activeMenuIndex, setActiveMenuIndex] = useState(0);
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -57,29 +36,38 @@ const MenuPopup: FC<MenuPopupProps> = ({ open, handleClose }) => {
           <Grid size={{ lg: 4 }}>
             <List
               sx={{
+                height: '100%',
                 backgroundColor: '#9C2D41',
-                color: 'white',
+                color: '#FAF7F4',
                 padding: '0',
               }}
             >
-              {menuItems.map((item, index) => (
+              {MENU_CONFIG.map((item, index) => (
                 <ListItem disablePadding key={index}>
-                  <ListItemButton
+                  <Button
+                    onClick={() => setActiveMenuIndex(index)}
                     sx={{
+                      width: '100%',
+                      paddingLeft: '2rem',
+                      color: '#FAF7F4',
+                      textAlign: 'left',
+                      textTransform: 'none',
+                      backgroundColor: theme.palette.background.burgundyRed,
+                      borderRadius: '0',
                       '&:hover': {
                         color: '#9C2D41',
-                        backgroundColor: '#FAF7F4',
+                        backgroundColor: theme.palette.background.cream,
                       },
                     }}
                   >
                     <ListItemText primary={item.label} />
-                  </ListItemButton>
+                  </Button>
                 </ListItem>
               ))}
             </List>
           </Grid>
           <Grid
-            sx={{ backgroundColor: '#FAF7F4' }}
+            sx={{ backgroundColor: theme.palette.background.cream }}
             size={{ md: 8, lg: 8, xl: 8 }}
           >
             <CloseIcon
@@ -96,7 +84,7 @@ const MenuPopup: FC<MenuPopupProps> = ({ open, handleClose }) => {
               onClick={handleClose}
             />
             <List sx={{ width: '50%' }}>
-              {subscriptionItems.map((item, index) => (
+              {MENU_CONFIG[activeMenuIndex].subItems?.map((item, index) => (
                 <ListItem disablePadding key={index}>
                   <ListItemButton
                     component="a"

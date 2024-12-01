@@ -43,11 +43,11 @@ const LeftSidebar = () => {
               sx={{
                 transition: 'background-color 0.3s ease-in-out',
                 '&:hover': {
-                  backgroundColor: '#D4A373',
+                  backgroundColor: '#F4F5F4',
                   outline: '1px solid white',
                 },
                 '&:focus': {
-                  backgroundColor: '#D4A373',
+                  backgroundColor: '#F4F5F4',
                 },
               }}
             >
