@@ -38,7 +38,7 @@ export const MENU_CONFIG: MenuItem[] = [
         label: `Gérer les services d'inscription`,
         href: '/inscription-services',
       },
-      { label: 'Gérer les inscriptions', href: '/handleSubscription' },
+      { label: 'Gérer les inscriptions', href: '/handle-subscription' },
       { label: 'Gérer les mesures handicap', href: '/disability-measures' },
       { label: 'Editer des listes de candidatures', href: '/candidate-lists' },
       {

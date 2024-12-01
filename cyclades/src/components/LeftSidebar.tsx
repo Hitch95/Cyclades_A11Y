@@ -26,13 +26,13 @@ const LeftSidebar = () => {
       direction="column"
       sx={{
         width: '15rem',
-        backgroundColor: '#FAF7F4',
-        borderRight: '1px solid #9C2D41',
+        borderRight: '1px solid black',
       }}
     >
       <List
         sx={{
-          color: 'black',
+          color: 'white',
+          backgroundColor: '#1B1B1B',
           padding: '1px',
         }}
       >
@@ -41,13 +41,16 @@ const LeftSidebar = () => {
             <ListItemButton
               role="button"
               sx={{
+                borderTop: '1px solid white',
+                borderBottom: '1px solid white',
                 transition: 'background-color 0.3s ease-in-out',
                 '&:hover': {
-                  backgroundColor: '#F4F5F4',
-                  outline: '1px solid white',
+                  color: 'black',
+                  backgroundColor: 'white',
                 },
                 '&:focus': {
-                  backgroundColor: '#F4F5F4',
+                  color: 'white',
+                  backgroundColor: '#9C2D41',
                 },
               }}
             >
